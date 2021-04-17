@@ -17,9 +17,11 @@ const noteList = [];
 
 // Routes
 
-app.get('/', (req, res) => res.sendFile(path.join(__dirname, './public/index.html')));
-app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, './public/notes.html')));
-app.get('*', (req, res) => res.sendFile(path.join(__dirname, './public/index.html')));
+// app.get('/', (req, res) => res.sendFile(path.join(__dirname, './public/index.html')));
+// app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, './public/notes.html')));
+// app.get('*', (req, res) => res.sendFile(path.join(__dirname, './public/index.html')));
+
+// app.get("/public/js/index.js", (req, res) => res.sendFile(path.join(__dirname, "../public/js/index.js")))
 
 // app.post('/reserve', (req, res) => {
     
