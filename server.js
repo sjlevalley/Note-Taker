@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const db = require("./index.js")
+
 // const fs = require('fs').promises;
 
 // Sets up the Express App
@@ -10,16 +12,14 @@ const PORT = process.env.PORT || 3001;
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, './public')));
+app.use(express.static(path.join(__dirname, './public'), { extensions: [".html"] } ));
 
 
-const noteList = [];
+
 
 // Routes
 
-// app.get('/', (req, res) => res.sendFile(path.join(__dirname, './public/index.html')));
-// app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, './public/notes.html')));
-// app.get('*', (req, res) => res.sendFile(path.join(__dirname, './public/index.html')));
+app.get('*', (req, res) => res.sendFile(path.join(__dirname, './public/index.html')));
 
 // app.get("/public/js/index.js", (req, res) => res.sendFile(path.join(__dirname, "../public/js/index.js")))
 
@@ -35,7 +35,9 @@ const noteList = [];
 
 // Displays all notes
 
-// app.get('/api/notes', (req, res) => res.json(noteList));
+app.get("/api/notes", (req, res) => 
+ db.readNotes().then(notes => res.json(notes))
+);
 
 
 

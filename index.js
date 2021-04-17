@@ -4,13 +4,14 @@ let saveNoteBtn;
 let newNoteBtn;
 let noteList;
 
-if (window.location.pathname === '/public/notes') {
+if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
   noteText = document.querySelector('.note-textarea');
   saveNoteBtn = document.querySelector('.save-note');
   newNoteBtn = document.querySelector('.new-note');
   noteList = document.querySelectorAll('.list-container .list-group');
 }
+
 
 // Show an element
 const show = (elem) => {
@@ -180,3 +181,12 @@ if (window.location.pathname === '/notes') {
 }
 
 getAndRenderNotes();
+
+
+const readNotes = () =>
+ fs 
+  .readFile(path.join(__dirname, "../db/db.json"), "utf-8")
+  .then((data) => JSON.parse(data));
+
+
+module.exports = { readNotes };
