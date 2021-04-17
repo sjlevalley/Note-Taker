@@ -4,6 +4,7 @@ let saveNoteBtn;
 let newNoteBtn;
 let noteList;
 
+console.log(window);
 if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
   noteText = document.querySelector('.note-textarea');
@@ -183,10 +184,4 @@ if (window.location.pathname === '/notes') {
 getAndRenderNotes();
 
 
-const readNotes = () =>
- fs 
-  .readFile(path.join(__dirname, "../db/db.json"), "utf-8")
-  .then((data) => JSON.parse(data));
 
-
-module.exports = { readNotes };

@@ -1,9 +1,12 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
-const db = require("./index.js")
+const db = require('./db.js');
+// const noteArray = require('noteArray');
 
-// const fs = require('fs').promises;
+console.log(db);
+
+
 
 // Sets up the Express App
 const app = express();
@@ -12,32 +15,28 @@ const PORT = process.env.PORT || 3001;
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, './public'), { extensions: [".html"] } ));
+app.use(express.static(path.join(__dirname, "./public")));
+
+  
 
 
-
+// console.log(noteList);
 
 // Routes
 
-app.get('*', (req, res) => res.sendFile(path.join(__dirname, './public/index.html')));
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, './public/index.html')));
+app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, './public/notes.html')));
+// app.get('*', (req, res) => res.sendFile(path.join(__dirname, './public/index.html')));
 
-// app.get("/public/js/index.js", (req, res) => res.sendFile(path.join(__dirname, "../public/js/index.js")))
-
-// app.post('/reserve', (req, res) => {
-    
-//     const newNote = req.body;
-
-// });
+app.get("/api/notes", (req, res) => res.json(db));
 
 
+app.post("/api/notes", (req, res) => {
+    const {title, text} = req.body;
+});
 
 
 
-// Displays all notes
-
-app.get("/api/notes", (req, res) => 
- db.readNotes().then(notes => res.json(notes))
-);
 
 
 
