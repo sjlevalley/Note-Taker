@@ -70,7 +70,6 @@ app.delete("/api/notes/:id", function(req, res) {
     let noteID = req.params.id;
     for (i=0; i<db.length; i++){
       if (db[i].id === noteID){
-        console.log(i);
         db.splice(i, 1);
         updateNotes();
         res.send(db);
