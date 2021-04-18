@@ -40,19 +40,33 @@ app.get("/api/notes", (req, res) => {
       })
 });
  
+
+ currentNotes = () => {
+    fs.readFile("./db.json", "utf-8", (err, data) => {
+        if (err) {
+          console.error(err)
+          return
+        }    
+})};
+
     
-
-
-
-
-
-// app.post("/api/notes", (req, res) => 
+app.post("/api/notes", (req, res) => {
     
-//     fs.readFile((path.join(__dirname, "/db.js", 'utf-8', function(err, data){
-//         res.json(req.body)
-//     })
+    // currentNotes();
+    db.push(req.body);
+    fs.writeFile("./db.json", JSON.stringify(db), (err) => {
+        if (err) throw err;
+        console.log('The file has been saved!');
+      });
+    res.send(db);
+
+
+            
+
+
+});
     
-//     ));
+    
 
 
 
