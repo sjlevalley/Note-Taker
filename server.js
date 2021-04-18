@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const db = require('./db.json');
 const { nanoid } = require("nanoid");
-const { json } = require('express');
+// const { json } = require('express');
 
 
 // Sets up the Express App
@@ -62,9 +62,17 @@ app.post("/api/notes", (req, res) => {
 
 
 app.delete("/api/notes/:id", function(req, res) {
-    db.splice(req.params.id, 1);
-    updateNotes();
-    res.send(db);
+    let noteID = req.params.id;
+    // console.log(noteID);
+    for (i=0; i<db.length; i++){
+
+      if (db[i].id === noteID){
+        console.log(i);
+        db.splice(i, 1);
+        updateNotes();
+        res.send(db);
+      }
+    }
 });
 
 
