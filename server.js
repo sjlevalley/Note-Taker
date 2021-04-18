@@ -17,8 +17,16 @@ app.use(express.static(path.join(__dirname, "./public")));
 
 
 
+// ######################## Function to Update Notes after Addition or Deletion ###########
 
-// console.log(noteList);
+function updateNotes() {
+    fs.writeFile("./db.json", JSON.stringify(db), (err) => {
+    if (err) throw err;
+    console.log('The notes list has been updated!');
+      });
+    }
+
+
 
 // Routes
 
@@ -27,7 +35,7 @@ app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, './public/note
 // app.get('*', (req, res) => res.sendFile(path.join(__dirname, './public/index.html')));
 
 
-
+// ######################### API Get Request ##############################
 
 app.get("/api/notes", (req, res) => {
     fs.readFile("./db.json", "utf-8", (err, data) => {
@@ -39,90 +47,22 @@ app.get("/api/notes", (req, res) => {
         res.send(data);
       })
 });
- 
-
- currentNotes = () => {
-    fs.readFile("./db.json", "utf-8", (err, data) => {
-        if (err) {
-          console.error(err)
-          return
-        }    
-})};
-
     
+// ######################### API Post Request ##############################
+
 app.post("/api/notes", (req, res) => {
-    
-    // currentNotes();
     db.push(req.body);
-    fs.writeFile("./db.json", JSON.stringify(db), (err) => {
-        if (err) throw err;
-        console.log('The file has been saved!');
-      });
+    updateNotes();
     res.send(db);
-
-
-            
-
-
 });
-    
-    
+
+// ################## Delete's Note When Trashcan is Clicked ###############
 
 
-
-
-// const readNotes = () =>
-//     fs.readFile(path.join(__dirname, "/db.js"), "utf-8")
-//         .then((data) => console.log(data));
-
-// const makeNote = (title, noteText) => {
-//     if (!title || noteText) {
-//         return Promise.reject(new Error("Cannot have an empty title or text"));
-//     } 
-    
-    
-//     fs.readFile(path.join(__dirname, "/db.js"), "utf-8")
-//         .then((data) => JSON.parse(data))
-    
-//     .then((noteArray) => {
-//         const note = {
-//             // id: nanoid(),
-//             title,
-//             noteText,
-//         };
-//         noteArray.push(note);
-//         return fs.writeFile(path.join(__dirname, "/db.js"), JSON.stringify(movies), "utf-8")
-//             .then(() => note);
-//     });
-// };
-
-
-// app.post("api/notes", (req, res) => {
-//     res(req.body);
-//     // const { title, noteText } = req.body;
-//     // makeNote(title, noteText)
-//     // .then(() => res("hello"))
-//     // .catch((err) => {
-//     //     console.log(err);
-//     //     res.sendStatus(400);
-//     // });
-// });
-
-
-// app.post("/api/notes", (req, res) => {
-//     newNoteInfo = req.body;
-//     let filePath = path.join(__dirname, "/db.js");
-//     noteArray.push(newNoteInfo);
-
-//     fs.writeFile(filePath, JSON.stringify(noteArray), function (err) {
-//         if (err) {
-//             return console.log(err);
-//         }
-//         console.log("Note saved successfully!");
-//     })
-
-//     res.json(noteArray);
-// });
+app.delete("/api/notes/:id", function(req, res) {
+    db.splice(req.params.id, 1);
+    updateNotes();
+});
 
 
 
