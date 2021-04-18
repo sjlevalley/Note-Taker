@@ -3,8 +3,6 @@ const path = require('path');
 const fs = require('fs');
 const db = require('./db.json');
 const { nanoid } = require("nanoid");
-// const { json } = require('express');
-
 
 // Sets up the Express App
 const app = express();
@@ -18,6 +16,8 @@ app.use(express.static(path.join(__dirname, "./public")));
 
 
 // ######################## Function to Update Notes after Addition or Deletion ###########
+// ######################## Function to Update Notes after Addition or Deletion ###########
+// ######################## Function to Update Notes after Addition or Deletion ###########
 
 function updateNotes() {
     fs.writeFile("./db.json", JSON.stringify(db), (err) => {
@@ -26,16 +26,18 @@ function updateNotes() {
       });
     }
 
-
-
-// Routes
+    
+// ############################################### Routes #################################
+// ############################################### Routes #################################
+// ############################################### Routes #################################
 
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, './public/index.html')));
 app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, './public/notes.html')));
-// app.get('*', (req, res) => res.sendFile(path.join(__dirname, './public/index.html')));
 
 
-// ######################### API Get Request ##############################
+// ###################################### API Get Request #################################
+// ###################################### API Get Request #################################
+// ###################################### API Get Request #################################
 
 app.get("/api/notes", (req, res) => {
     fs.readFile("./db.json", "utf-8", (err, data) => {
@@ -48,7 +50,9 @@ app.get("/api/notes", (req, res) => {
       })
 });
     
-// ######################### API Post Request ##############################
+// ###################################### API Post Request ################################
+// ###################################### API Post Request ################################
+// ###################################### API Post Request ################################
 
 app.post("/api/notes", (req, res) => {
     let note = req.body;
@@ -58,14 +62,13 @@ app.post("/api/notes", (req, res) => {
     res.send(db);
 });
 
-// ################## Delete's Note When Trashcan is Clicked ###############
-
+// ###################################### Delete Note #####################################
+// ###################################### Delete Note #####################################
+// ###################################### Delete Note #####################################
 
 app.delete("/api/notes/:id", function(req, res) {
     let noteID = req.params.id;
-    // console.log(noteID);
     for (i=0; i<db.length; i++){
-
       if (db[i].id === noteID){
         console.log(i);
         db.splice(i, 1);
@@ -76,16 +79,11 @@ app.delete("/api/notes/:id", function(req, res) {
 });
 
 
-// ################## Display Note When Note is Clicked on List ###############
-
+// ############################ Display Note When Clicked #################################
 
 app.get("/api/notes/:id", function(req, res) {
     res.json(req.params.id);
 });
-
-
-
-
 
 
 // Starts the server to begin listening
