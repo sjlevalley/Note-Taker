@@ -1,8 +1,9 @@
 const express = require('express');
 const path = require('path');
-const fs = require('fs').promises;
+const fs = require('fs');
 const db = require('./db.json');
 const { nanoid } = require("nanoid");
+const { json } = require('express');
 
 
 // Sets up the Express App
@@ -29,11 +30,14 @@ app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, './public/note
 
 
 app.get("/api/notes", (req, res) => {
-
-    const currentNotes = fs.readFileSync("./db.json", "utf-8")
-    .then((data) => JSON.parse(data)); 
-    console.log(data);
-    res.json(currentNotes);
+    fs.readFile("./db.json", "utf-8", (err, data) => {
+        if (err) {
+          console.error(err)
+          return
+        }
+        JSON.stringify(data);
+        res.send(data);
+      })
 });
  
     
