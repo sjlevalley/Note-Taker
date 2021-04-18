@@ -52,6 +52,7 @@ app.get("/api/notes", (req, res) => {
 
 app.post("/api/notes", (req, res) => {
     let note = req.body;
+    note.id = nanoid();
     db.push(note);
     updateNotes();
     res.send(db);
