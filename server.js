@@ -51,7 +51,8 @@ app.get("/api/notes", (req, res) => {
 // ######################### API Post Request ##############################
 
 app.post("/api/notes", (req, res) => {
-    db.push(req.body);
+    let note = req.body;
+    db.push(note);
     updateNotes();
     res.send(db);
 });
@@ -62,15 +63,14 @@ app.post("/api/notes", (req, res) => {
 app.delete("/api/notes/:id", function(req, res) {
     db.splice(req.params.id, 1);
     updateNotes();
-    res.send("Note Deleted!")
+    res.send(db);
 });
 
 
-// ################## Delete's Note When Trashcan is Clicked ###############
+// ################## Display Note When Note is Clicked on List ###############
 
 
 app.get("/api/notes/:id", function(req, res) {
-    // db.splice(req.params.id, 1);
     res.json(req.params.id);
 });
 
