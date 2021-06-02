@@ -1,12 +1,16 @@
 ## NOTE TAKER
 
-![App Screenshot](noteTaker.png "Description")
-
 ![](https://img.shields.io/badge/License-MIT-yellow.svg)
+
+# Screenshot of App
+
+![App Screenshot](noteTaker.png "Description")
 
 ## DESCRIPTION
 
-- This project is intended to be a fully functional notation app that allows anybody to add and delete notes as needed.
+This App was created with HTML, CSS, and JavaScript, and allows the user to keep detailed notes about things they
+may otherwise forget. After all, people are busy, and this app can alleviate the irritation that occurs when something
+important is forgotten. Users can create notes, edit notes, and delete notes as desired.
 
 ## TABLE OF CONTENTS
 
