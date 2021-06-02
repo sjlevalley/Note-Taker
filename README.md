@@ -12,6 +12,8 @@ This App was created with HTML, CSS, and JavaScript, and allows the user to keep
 may otherwise forget. After all, people are busy, and this app can alleviate the irritation that occurs when something
 important is forgotten. Users can create notes, edit notes, and delete notes as desired.
 
+You can use this app here: https://note-taker-00000001.herokuapp.com/
+
 ## TABLE OF CONTENTS
 
 - [Description](#description)
